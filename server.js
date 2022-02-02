@@ -4,8 +4,9 @@ const fs = require("fs");
 
 const app = express();
 
-app.get("/fs/:filename!:random", (req, res) => {
-    const filename = req.params.filename;
+app.get(/\/fs\/(.+)\!(.+).(swf|png|jpg)/, (req, res) => {
+    const ext = "." + req.params[2];
+    const filename = req.params[0] + ext;
     if (fs.existsSync(__dirname + "/storage/" + filename)) {
         console.log("File is cached", filename);
         return res.sendFile(__dirname + "/storage/" + filename);
