@@ -4,7 +4,7 @@ const fs = require("fs");
 
 const app = express();
 
-app.get("/fs/:filename", (req, res) => {
+app.get("/fs/:filename!:random", (req, res) => {
     const filename = req.params.filename;
     if (fs.existsSync(__dirname + "/storage/" + filename)) {
         console.log("File is cached", filename);
@@ -12,7 +12,7 @@ app.get("/fs/:filename", (req, res) => {
     } else {
         console.log("File is proxied", filename);
         const reqw = request
-            .get("http://sharaball.ru/fs/" + filename)
+            .get("http://oreoland.tk/fs/" + filename)
             .on("response", (resp) => {
                 if(resp.statusCode == 200) {
                     reqw.pipe(res);
