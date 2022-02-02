@@ -4,7 +4,7 @@ const fs = require("fs");
 
 const app = express();
 
-app.get("/:filename", (req, res) => {
+app.get("/fs/:filename", (req, res) => {
     const filename = req.params.filename;
     if (fs.existsSync(__dirname + "/storage/" + filename)) {
         console.log("File is cached", filename);
