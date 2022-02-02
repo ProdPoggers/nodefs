@@ -10,8 +10,13 @@
 Ставим Node.js, распаковываем данный скрипт, устанавливаем зависимости и настраиваем NGINX reverse proxy для параллельной работы с apache
 
 2. Установка через Docker
+
+Выполняйте команды по очереди при наличии установленного Docker и Docker Compose.
+```sh
+git clone https://github.com/lunnaholy/nodefs.git
+cd nodefs
+docker-compose up
 ```
-docker push lunnaholy/nodefs:latest
-```
+После успешного выполнения команд выше nodefs будет доступен на порту 9443.
 
 дальше сами, я устал
