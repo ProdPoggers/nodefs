@@ -15,7 +15,7 @@
 ```sh
 git clone https://github.com/lunnaholy/nodefs.git
 cd nodefs
-docker-compose up
+docker-compose up -d
 ```
 После успешного выполнения команд выше nodefs будет доступен на порту 9443.
 
