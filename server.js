@@ -13,7 +13,7 @@ app.get(/\/fs\/(.+)\!(.+).(swf|png|jpg)/, (req, res) => {
     } else {
         console.log("File is proxied", filename);
         const reqw = request
-            .get("http://oreoland.tk/fs/" + filename)
+            .get("http://oreoland.tk/fs/" + req.params[0] + "!bebra" + ext)
             .on("response", (resp) => {
                 if(resp.statusCode == 200) {
                     reqw.pipe(res);
