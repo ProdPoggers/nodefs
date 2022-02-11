@@ -4,8 +4,17 @@ const fs = require("fs");
 
 const app = express();
 
-app.get(/\/fs\/(.+)\!(.+).(swf|png|jpg)/, (req, res) => {
-    const ext = "." + req.params[2];
+app.get(/\/fs\/(.+)\!(.+).(swf|png|jpg)/, serve);
+app.get(/\/fs\/(.+)\!.(swf|png|jpg)/, serve);
+app.get(/\/fs\/(.+).(swf|png|jpg)/, serve);
+
+function serve(req, res) {
+    let ext = ".";
+    if(req.params[2]) {
+        ext += req.params[2];
+    } else {
+        ext += req.params[1];
+    }
     const filename = req.params[0] + ext;
     if (fs.existsSync(__dirname + "/storage/" + filename)) {
         console.log("File is cached", filename);
@@ -13,7 +22,7 @@ app.get(/\/fs\/(.+)\!(.+).(swf|png|jpg)/, (req, res) => {
     } else {
         console.log("File is proxied", filename);
         const reqw = request
-            .get("http://sharaball.ru/fs/" + req.params[0] + "!bebra" + ext)
+            .get("http://sharaball.ru/fs/" + req.params[0] + "!" + ext)
             .on("response", (resp) => {
                 if(resp.statusCode == 200) {
                     reqw.pipe(res);
@@ -24,6 +33,6 @@ app.get(/\/fs\/(.+)\!(.+).(swf|png|jpg)/, (req, res) => {
                 }
             });
     }
-});
+}
 
 app.listen(8080);
